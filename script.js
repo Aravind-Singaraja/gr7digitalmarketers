@@ -76,19 +76,29 @@
     });
 
     // === CONTACT FORM ===
-    var form = document.getElementById('contactForm');
-    if (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var name = form.querySelector('#name').value.trim();
-            var phone = form.querySelector('#phone').value.trim();
-            var service = form.querySelector('#service').value;
-            var msg = form.querySelector('#message').value.trim();
-            if (!name || !phone) { alert('Please fill in your name and phone number.'); return; }
-            var waMsg = encodeURIComponent('Hi GR7! I\'m ' + name + ' (' + phone + '). Service: ' + (service || 'General Enquiry') + '. ' + (msg || ''));
-            window.open('https://wa.me/917358182759?text=' + waMsg, '_blank', 'noopener,noreferrer');
-        });
-    }
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const service = document.getElementById("service").value;
+        const message = document.getElementById("message").value.trim();
+
+        if (!name || !phone) {
+            alert("Please fill in your Name and Phone Number.");
+            return;
+        }
+        const whatsappMessage =
+            `*📋 New Free Audit Request*
+            *Name:* ${name}
+            *Phone:* ${phone}
+            *Service:* ${service || "General Enquiry"}
+            *Message:* ${message || "No message provided."}`;
+            const whatsappURL = `https://wa.me/917358182759?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(whatsappURL, "_blank");
+    });
 
     // === ACTIVE NAV HIGHLIGHT ===
     var sections = document.querySelectorAll('section[id]');
